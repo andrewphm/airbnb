@@ -3,10 +3,11 @@ import Head from 'next/head';
 // Layout
 import Layout from '../components/layouts/base';
 // UI Components
+import HeroBanner from '../components/common/Banner';
 
 export default function Home() {
   return (
-    <main className="flex flex-col justify-between h-screen">
+    <main className="flex flex-col min-h-screen">
       <Head>
         <title>Airbnb Clone</title>
         <meta name="description" content="Airbnb Clone" />
@@ -17,9 +18,7 @@ export default function Home() {
       </Head>
 
       <Layout>
-        <h1 className="text-blue-900 text-4xl font-extrabold ">
-          Lets build airbnb
-        </h1>
+        <HeroBanner />
       </Layout>
     </main>
   );
