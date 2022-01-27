@@ -38,14 +38,14 @@ const Header = () => {
 
       <div className="right relative hidden sm:inline-flex">
         <a
-          href=""
+          href="#"
           className="hover:bg-gray-100 px-3 py-2 rounded-full whitespace-nowrap hidden md:inline-flex"
         >
           Become a Host
         </a>
 
         <a
-          href=""
+          href="#"
           className="hover:bg-gray-100 px-3 py-2 rounded-full hidden md:inline-flex"
         >
           <LanguageIcon />
