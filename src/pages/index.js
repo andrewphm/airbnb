@@ -10,6 +10,7 @@ import HeroBanner from '../components/common/HeroBanner';
 import GiftCardBanner from '../components/common/GiftCardBanner';
 import ExploreBanner from '../components/common/ExploreBanner';
 import DiscoverBanner from '../components/common/DiscoverBanner';
+import InspireBanner from '../components/common/InspireBanner';
 
 export default function Home({ exploreData, discoverData }) {
   return (
@@ -29,6 +30,7 @@ export default function Home({ exploreData, discoverData }) {
         <section className="max-w-[1350px] px-5 mx-auto xl:max-w-7xl">
           <ExploreBanner exploreData={exploreData} />
           <DiscoverBanner discoverData={discoverData} />
+          <InspireBanner></InspireBanner>
         </section>
       </Layout>
     </main>

@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 const SmallCard = ({ img, distance, location }) => {
   return (
-    <div className="flex items-center rounded-xl hover:bg-gray-100 transition duration-200 ease-out hover:scale-105 cursor-pointer w-full max-w-[300px] sm:max-w-[250px] gap-x-3">
-      <div className="relative h-16 w-16">
+    <div className="flex items-center rounded-xl hover:bg-gray-200 transition duration-200 ease-out hover:scale-105 cursor-pointer w-full max-w-[300px] sm:max-w-[250px] gap-x-3 lg:max-w-[330px]">
+      <div className="relative h-16 w-16 lg:h-24 lg:w-24 ">
         <Image
           src={img}
           layout="fill"
@@ -14,7 +14,7 @@ const SmallCard = ({ img, distance, location }) => {
         />
       </div>
 
-      <div>
+      <div className="lg:text-xl">
         <h2 className="font-semibold">{location}</h2>
         <h3 className="text-gray-500">{distance}</h3>
       </div>
@@ -24,8 +24,8 @@ const SmallCard = ({ img, distance, location }) => {
 
 const ExploreBanner = ({ exploreData }) => {
   return (
-    <section className="my-8">
-      <h1 className="font-semibold text-[clamp(1.5rem,_3vw,_2.2rem)] mb-4">
+    <section className="my-12">
+      <h1 className="font-semibold text-[clamp(1.5rem,_3vw,_2rem)] mb-4">
         Explore Nearby
       </h1>
       <ul className="grid w-full mx-auto grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-4 ">

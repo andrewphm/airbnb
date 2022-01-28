@@ -19,8 +19,8 @@ const Card = ({ img, title }) => {
 
 const DiscoverBanner = ({ discoverData }) => {
   return (
-    <section className="my-8">
-      <h1 className="font-semibold text-[clamp(1.5rem,_3vw,_2.2rem)] mb-4">
+    <section className="my-12">
+      <h1 className="font-semibold text-[clamp(1.5rem,_3vw,_2rem)] mb-4">
         Discover Airbnb Experiences
       </h1>
 

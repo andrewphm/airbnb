@@ -19,7 +19,7 @@ const HeroBanner = () => {
           <p className="font-bold text-md sm:text-lg md:text-2xl lg:text-4xl">
             Not sure where to go? Perfect.
           </p>
-          <button className="bg-white py-3 px-10 rounded-full font-semibold shadow-md mt-3 xl:shadow-lg hover:shadow-xl active:scale-90 transition duration-150 lg:mt-10">
+          <button className="bg-white py-3 px-10 rounded-full font-semibold shadow-md mt-3 xl:shadow-lg hover:shadow-xl hover:scale-[1.03] active:scale-100 transition duration-150 lg:mt-10">
             <span className="text-transparent bg-[linear-gradient(90deg,_#6F019C_0%,_#C6017E_135.12%)_!important] bg-clip-text xl:text-2xl">
               I&apos;m flexible
             </span>

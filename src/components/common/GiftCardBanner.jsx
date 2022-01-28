@@ -43,7 +43,7 @@ const GiftCardBanner = () => {
             <br></br>
             gift cards
           </p>
-          <button className="text-2xl text-white py-3 px-8 bg-black rounded-xl mt-8 shadow-lg hover:shadow-xl active:scale-90 transition duration-150">
+          <button className="text-2xl text-white py-3 px-8 bg-black rounded-xl mt-8 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-100 transition duration-150">
             Shop now
           </button>
         </div>
