@@ -3,7 +3,8 @@ import Head from 'next/head';
 // Layout
 import Layout from '../components/layouts/base';
 // UI Components
-import HeroBanner from '../components/common/Banner';
+import HeroBanner from '../components/common/HeroBanner';
+import ExploreBanner from '../components/common/ExploreBanner';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
 
       <Layout>
         <HeroBanner />
+        <ExploreBanner />
       </Layout>
     </main>
   );

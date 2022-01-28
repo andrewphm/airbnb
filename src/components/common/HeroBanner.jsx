@@ -15,7 +15,7 @@ const HeroBanner = () => {
           objectPosition="bottom"
         />
 
-        <div className="absolute text-center top-1/2 text-black w-full">
+        <div className="absolute text-center top-[40%] text-black w-full">
           <p className="font-bold text-md sm:text-lg md:text-2xl lg:text-4xl">
             Not sure where to go? Perfect.
           </p>
