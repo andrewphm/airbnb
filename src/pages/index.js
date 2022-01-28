@@ -9,8 +9,9 @@ import Layout from '../components/layouts/base';
 import HeroBanner from '../components/common/HeroBanner';
 import GiftCardBanner from '../components/common/GiftCardBanner';
 import ExploreBanner from '../components/common/ExploreBanner';
+import DiscoverBanner from '../components/common/DiscoverBanner';
 
-export default function Home({ exploreData }) {
+export default function Home({ exploreData, discoverData }) {
   return (
     <main className="flex flex-col min-h-screen">
       <Head>
@@ -27,6 +28,7 @@ export default function Home({ exploreData }) {
         <GiftCardBanner />
         <section className="max-w-[1350px] px-5 mx-auto xl:max-w-7xl">
           <ExploreBanner exploreData={exploreData} />
+          <DiscoverBanner discoverData={discoverData} />
         </section>
       </Layout>
     </main>
@@ -34,17 +36,28 @@ export default function Home({ exploreData }) {
 }
 
 export async function getStaticProps() {
-  try {
-    const { data: exploreData } = await axios.get(
-      'https://jsonkeeper.com/b/4G1G'
-    );
+  let exploreData;
+  let discoverData;
 
-    return {
-      props: {
-        exploreData,
-      },
-    };
+  try {
+    const { data } = await axios.get('https://jsonkeeper.com/b/4G1G');
+
+    exploreData = data;
   } catch (error) {
     console.log(error);
   }
+
+  try {
+    const { data } = await axios.get('https://jsonkeeper.com/b/VHHT');
+    discoverData = data;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return {
+    props: {
+      exploreData,
+      discoverData,
+    },
+  };
 }
