@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Layout from '../components/layouts/base';
 // UI Components
 import HeroBanner from '../components/common/HeroBanner';
+import GiftCardBanner from '../components/common/GiftCardBanner';
 import ExploreBanner from '../components/common/ExploreBanner';
 
 export default function Home() {
@@ -20,7 +21,10 @@ export default function Home() {
 
       <Layout>
         <HeroBanner />
-        <ExploreBanner />
+        <div className="xl:px-40">
+          <GiftCardBanner />
+          <ExploreBanner />
+        </div>
       </Layout>
     </main>
   );
