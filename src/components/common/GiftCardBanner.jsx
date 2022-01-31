@@ -6,7 +6,7 @@ import giftCardLarge from '../../assets/giftcardlarge.webp';
 
 const GiftCardBanner = () => {
   return (
-    <section className="flex justify-center items-center p-4 xl:p-0 w-full md:w-full md:h-[500px] xl:mt-8">
+    <section className="flex justify-center items-center p-4 xl:p-0 w-full md:w-full md:h-[500px] mt-8">
       <div className="mobile w-[350px] h-[450px] xs:w-[400px] xs:h-[550px] sm:w-[440px] sm:h-[600px] relative rounded-3xl overflow-hidden md:hidden">
         <Image
           src={giftCardMobile}
