@@ -21,6 +21,7 @@ const Header = () => {
   };
 
   const [searchInput, setSearchInput] = useState('');
+  const [numOfGuests, setnumOfGuests] = useState(1);
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -127,20 +128,45 @@ const Header = () => {
       </div>
 
       {searchInput && (
-        <div className="w-full mx-auto text-center mt-3">
+        <div className="w-full mx-auto text-center mt-3 md:flex md:justify-center gap-x-10 lg:mt-5">
           <DateRangePicker
             ranges={[selectionRange]}
             onChange={handleSelect}
             minDate={new Date()}
             rangeColors={['#FD5B61']}
           />
-          <div className="border-b-2 border-b-gray-300 w-[330px] mx-auto">
-            <div className="flex justify-between">
-              <p className="text-xl font-semibold">Number of Guests</p>
 
-              <div>
-                <People />
+          <div>
+            <div className="border-b-2 border-b-gray-300 w-[330px] mx-auto">
+              <div className="flex justify-between px-1 pb-3">
+                <p className="text-xl font-semibold">Number of Guests</p>
+
+                <div className="flex items-center">
+                  <People />
+
+                  <input
+                    type="number"
+                    className="w-12 pl-2 outline-none text-lg text-red-400 font-bold"
+                    value={numOfGuests}
+                    onChange={(e) => {
+                      setnumOfGuests(e.target.value);
+                    }}
+                    min="1"
+                    max="30"
+                  />
+                </div>
               </div>
+            </div>
+            <div className="flex w-[330px] mx-auto gap-x-10 my-4 mt-5 justify-center">
+              <button className=" text-white py-1 px-8 rounded-full bg-[#FD5B61] hover:scale-[1.03] shadow-sm">
+                Search
+              </button>
+              <button
+                onClick={() => setSearchInput('')}
+                className="px-8 text-white bg-black rounded-full shadow-sm hover:scale-[1.03]"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
