@@ -30,7 +30,12 @@ export default function Home({ exploreData, discoverData }) {
         <section className="max-w-[1350px] px-5 mx-auto xl:max-w-7xl">
           <ExploreBanner exploreData={exploreData} />
           <DiscoverBanner discoverData={discoverData} />
-          <InspireBanner></InspireBanner>
+          <InspireBanner
+            img="https://a0.muscache.com/im/pictures/2da67c1c-0c61-4629-8798-1d4de1ac9291.jpg?im_w=1440"
+            title="The Great Outdoors"
+            description="Wishlists curated by Airbnb."
+            buttonText="Get Inspired"
+          />
         </section>
       </Layout>
     </main>
