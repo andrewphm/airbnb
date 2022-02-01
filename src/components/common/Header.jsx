@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
+import Link from 'next/link';
+
 // Date Range
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -41,7 +43,11 @@ const Header = () => {
       <div className="flex justify-center xs:justify-between items-center lg:px-10">
         <div className="left h-10 hidden xs:inline-flex">
           <div className="logo">
-            <Logo className="h-full" />
+            <Link href="/">
+              <a>
+                <Logo className="h-full" />
+              </a>
+            </Link>
           </div>
         </div>
 
