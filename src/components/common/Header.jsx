@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 // Date Range
 import 'react-date-range/dist/styles.css'; // main style file
@@ -16,6 +17,7 @@ import { AccountCircle, Menu, People } from '@mui/icons-material';
 const Header = () => {
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
+  const router = useRouter();
 
   const toggleMenu = () => {
     menuRef.current.classList.toggle('hidden');
@@ -32,6 +34,21 @@ const Header = () => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
   };
+
+  const handleSearchClick = () => {
+    router.push({
+      pathname: '/search',
+      query: {
+        location: searchInput,
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        numOfGuests,
+      },
+    });
+
+    setSearchInput('');
+  };
+
   const selectionRange = {
     startDate,
     endDate,
@@ -164,7 +181,10 @@ const Header = () => {
               </div>
             </div>
             <div className="flex w-[330px] mx-auto gap-x-10 my-4 mt-5 justify-center">
-              <button className=" text-white py-1 px-8 rounded-full bg-[#FD5B61] hover:scale-[1.03] shadow-sm">
+              <button
+                onClick={handleSearchClick}
+                className=" text-white py-1 px-8 rounded-full bg-[#FD5B61] hover:scale-[1.03] shadow-sm"
+              >
                 Search
               </button>
               <button
