@@ -17,6 +17,8 @@ import { AccountCircle, Menu, People } from '@mui/icons-material';
 const Header = () => {
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
+  const [placeholder, setPlaceholder] = useState('');
+
   const router = useRouter();
 
   const toggleMenu = () => {
@@ -36,17 +38,17 @@ const Header = () => {
   };
 
   const handleSearchClick = () => {
-    router.push({
-      pathname: '/search',
-      query: {
-        location: searchInput,
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-        numOfGuests,
-      },
-    });
+    // router.push({
+    //   pathname: '/search',
+    //   query: {
+    //     location: searchInput,
+    //     startDate: startDate.toISOString(),
+    //     endDate: endDate.toISOString(),
+    //     numOfGuests,
+    //   },
+    // });
 
-    setSearchInput('');
+    setPlaceholder(`${searchInput}`);
   };
 
   const selectionRange = {
@@ -73,7 +75,7 @@ const Header = () => {
             <input
               type="text"
               className="focus:outline-0 mx-2 lg:w-[250px]"
-              placeholder="Start your search"
+              placeholder={placeholder || 'Start your Search'}
               value={searchInput}
               onChange={(e) => {
                 setSearchInput(e.target.value);
@@ -151,48 +153,57 @@ const Header = () => {
       </div>
 
       {searchInput && (
-        <div className="w-full mx-auto text-center mt-3 md:flex md:justify-center gap-x-10 lg:mt-5">
-          <DateRangePicker
-            ranges={[selectionRange]}
-            onChange={handleSelect}
-            minDate={new Date()}
-            rangeColors={['#FD5B61']}
-          />
+        <div className="w-screen h-full relative mx-auto flex justify-center">
+          <div className="w-full max-w-fit absolute mx-auto text-center mt-3 md:flex md:justify-center gap-x-10 lg:mt-5 bg-white rounded-2xl top-1 py-5 shadow-xl p-5">
+            <DateRangePicker
+              ranges={[selectionRange]}
+              onChange={handleSelect}
+              minDate={new Date()}
+              rangeColors={['#FD5B61']}
+            />
 
-          <div>
-            <div className="border-b-2 border-b-gray-300 w-[330px] mx-auto">
-              <div className="flex justify-between px-1 pb-3">
-                <p className="text-xl font-semibold">Number of Guests</p>
+            <div className="flex h-full flex-col">
+              <div className="border-b-2 border-b-gray-300 w-[330px] mx-auto">
+                <div className="flex justify-between px-1 pb-3">
+                  <p className="text-xl font-semibold">Number of Guests</p>
 
-                <div className="flex items-center">
-                  <People />
+                  <div className="flex items-center">
+                    <People />
 
-                  <input
-                    type="number"
-                    className="w-12 pl-2 outline-none text-lg text-red-400 font-bold"
-                    value={numOfGuests}
-                    onChange={(e) => {
-                      setnumOfGuests(e.target.value);
-                    }}
-                    min="1"
-                    max="30"
-                  />
+                    <input
+                      type="number"
+                      className="w-12 pl-2 outline-none text-lg text-red-400 font-bold"
+                      value={numOfGuests}
+                      onChange={(e) => {
+                        setnumOfGuests(e.target.value);
+                      }}
+                      min="1"
+                      max="30"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex w-[330px] mx-auto gap-x-10 my-4 mt-5 justify-center">
-              <button
-                onClick={handleSearchClick}
-                className=" text-white py-1 px-8 rounded-full bg-[#FD5B61] hover:scale-[1.03] shadow-sm"
-              >
-                Search
-              </button>
-              <button
-                onClick={() => setSearchInput('')}
-                className="px-8 text-white bg-black rounded-full shadow-sm hover:scale-[1.03]"
-              >
-                Cancel
-              </button>
+              <div className="flex w-[330px] mx-auto gap-x-10 my-4 mt-5 justify-center">
+                <Link
+                  href={`/search?location=${searchInput}&guests=${numOfGuests}&startDate=${startDate}&endDate=${endDate}`}
+                >
+                  <a>
+                    <button
+                      onClick={handleSearchClick}
+                      className=" text-white py-1 px-8 rounded-full bg-[#FD5B61] hover:scale-[1.03] shadow-sm"
+                    >
+                      Search
+                    </button>
+                  </a>
+                </Link>
+
+                <button
+                  onClick={() => setSearchInput('')}
+                  className="px-8 text-white bg-black rounded-full shadow-sm hover:scale-[1.03]"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
