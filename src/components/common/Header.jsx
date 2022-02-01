@@ -3,6 +3,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { setQuery } from '../../redux/searchSlice';
+
 // Date Range
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -18,42 +22,62 @@ const Header = () => {
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
   const [placeholder, setPlaceholder] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
 
   const router = useRouter();
+
+  const currentQuery = useSelector((state) => state.search.query);
 
   const toggleMenu = () => {
     menuRef.current.classList.toggle('hidden');
     menuButtonRef.current.classList.toggle('shadow-md');
   };
 
-  const [searchInput, setSearchInput] = useState('');
-  const [numOfGuests, setnumOfGuests] = useState(1);
+  const dispatch = useDispatch();
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [dateRange, setDateRange] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
 
   const handleSelect = (ranges) => {
-    setStartDate(ranges.selection.startDate);
-    setEndDate(ranges.selection.endDate);
+    setDateRange({
+      startDate: ranges.selection.startDate,
+      endDate: ranges.selection.endDate,
+    });
+
+    dispatch(
+      setQuery({
+        ...currentQuery,
+        startDate: ranges.selection.startDate.toISOString(),
+        endDate: ranges.selection.endDate.toISOString(),
+      })
+    );
   };
 
   const handleSearchClick = () => {
-    // router.push({
-    //   pathname: '/search',
-    //   query: {
-    //     location: searchInput,
-    //     startDate: startDate.toISOString(),
-    //     endDate: endDate.toISOString(),
-    //     numOfGuests,
-    //   },
-    // });
+    setIsSearching((prev) => false);
 
-    setPlaceholder(`${searchInput}`);
+    router.push({
+      pathname: '/search',
+      query: {
+        location: currentQuery.location,
+        startDate: currentQuery.startDate,
+        endDate: currentQuery.endDate,
+        numOfGuests: currentQuery.numOfGuests,
+      },
+    });
+  };
+
+  const handleSearchChange = (e) => {
+    setIsSearching((prev) => true);
+
+    dispatch(setQuery({ ...currentQuery, [e.target.name]: e.target.value }));
   };
 
   const selectionRange = {
-    startDate,
-    endDate,
+    startDate: dateRange.startDate,
+    endDate: dateRange.endDate,
     key: 'selection',
   };
 
@@ -76,10 +100,9 @@ const Header = () => {
               type="text"
               className="focus:outline-0 mx-2 lg:w-[250px]"
               placeholder={placeholder || 'Start your Search'}
-              value={searchInput}
-              onChange={(e) => {
-                setSearchInput(e.target.value);
-              }}
+              value={currentQuery.location}
+              onChange={handleSearchChange}
+              name="location"
             />
             <div className="search-icon bg-[#FF385C] rounded-full h-8 w-8 flex items-center justify-center">
               <SearchIcon className="text-white text-base" />
@@ -152,7 +175,7 @@ const Header = () => {
         </div>
       </div>
 
-      {searchInput && (
+      {currentQuery.location && isSearching && (
         <div className="w-screen h-full relative mx-auto flex justify-center">
           <div className="w-full max-w-fit absolute mx-auto text-center mt-3 md:flex md:justify-center gap-x-10 lg:mt-5 bg-white rounded-2xl top-1 py-5 shadow-xl p-5">
             <DateRangePicker
@@ -160,6 +183,7 @@ const Header = () => {
               onChange={handleSelect}
               minDate={new Date()}
               rangeColors={['#FD5B61']}
+              name="date"
             />
 
             <div className="flex h-full flex-col">
@@ -173,10 +197,9 @@ const Header = () => {
                     <input
                       type="number"
                       className="w-12 pl-2 outline-none text-lg text-red-400 font-bold"
-                      value={numOfGuests}
-                      onChange={(e) => {
-                        setnumOfGuests(e.target.value);
-                      }}
+                      value={currentQuery.numOfGuests}
+                      name="numOfGuests"
+                      onChange={handleSearchChange}
                       min="1"
                       max="30"
                     />
@@ -184,18 +207,14 @@ const Header = () => {
                 </div>
               </div>
               <div className="flex w-[330px] mx-auto gap-x-10 my-4 mt-5 justify-center">
-                <Link
-                  href={`/search?location=${searchInput}&guests=${numOfGuests}&startDate=${startDate}&endDate=${endDate}`}
-                >
-                  <a>
-                    <button
-                      onClick={handleSearchClick}
-                      className=" text-white py-1 px-8 rounded-full bg-[#FD5B61] hover:scale-[1.03] shadow-sm"
-                    >
-                      Search
-                    </button>
-                  </a>
-                </Link>
+                <a>
+                  <button
+                    onClick={handleSearchClick}
+                    className=" text-white py-1 px-8 rounded-full bg-[#FD5B61] hover:scale-[1.03] shadow-sm"
+                  >
+                    Search
+                  </button>
+                </a>
 
                 <button
                   onClick={() => setSearchInput('')}
