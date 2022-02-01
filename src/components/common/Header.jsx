@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -21,19 +21,17 @@ import { AccountCircle, Menu, People } from '@mui/icons-material';
 const Header = () => {
   const menuRef = useRef(null);
   const menuButtonRef = useRef(null);
-  const [placeholder, setPlaceholder] = useState('');
   const [isSearching, setIsSearching] = useState(false);
 
   const router = useRouter();
 
   const currentQuery = useSelector((state) => state.search.query);
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     menuRef.current.classList.toggle('hidden');
     menuButtonRef.current.classList.toggle('shadow-md');
   };
-
-  const dispatch = useDispatch();
 
   const [dateRange, setDateRange] = useState({
     startDate: new Date(),
@@ -99,7 +97,7 @@ const Header = () => {
             <input
               type="text"
               className="focus:outline-0 mx-2 lg:w-[250px]"
-              placeholder={placeholder || 'Start your Search'}
+              placeholder={'Start your Search'}
               value={currentQuery.location}
               onChange={handleSearchChange}
               name="location"

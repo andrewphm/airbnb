@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import { format } from 'date-fns';
 
-const Search = () => {
+const Search = ({ data }) => {
   const router = useRouter();
 
   const { location, startDate, endDate, numOfGuests } = router.query;
@@ -43,3 +43,14 @@ const Search = () => {
 };
 
 export default Search;
+
+export async function getServerSideProps() {
+  const res = await fetch('https://jsonkeeper.com/b/5NPS');
+  const data = await res.json();
+
+  return {
+    props: {
+      data,
+    },
+  };
+}
