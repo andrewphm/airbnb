@@ -6,8 +6,13 @@ import { useRouter } from 'next/router';
 
 import { format } from 'date-fns';
 
+// UI Components
+import InfoCard from '../components/common/InfoCard';
+
 const Search = ({ data }) => {
   const router = useRouter();
+
+  console.log(data);
 
   const { location, startDate, endDate, numOfGuests } = router.query;
 
@@ -15,14 +20,13 @@ const Search = ({ data }) => {
 
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
 
-  const range = `${formattedStartDate} - ${formattedEndDate}`;
-
   return (
     <main className="flex flex-col min-h-screen justify-between">
       <Layout>
         <section className="flex-grow pt-14 px-6">
           <p className="text-xs">
-            300+ stays for - {range} - {numOfGuests} number of guests
+            300+ stays for {formattedStartDate} to {formattedEndDate} -{' '}
+            {numOfGuests} guests
           </p>
 
           <h1 className="text-3xl font-semibold mt-2 mb-6">
@@ -35,6 +39,12 @@ const Search = ({ data }) => {
             <p className="button">Price</p>
             <p className="button">Rooms and Beds</p>
             <p className="button">More filters</p>
+          </div>
+
+          <div>
+            {data.map((item, i) => (
+              <InfoCard key={i} item={item} />
+            ))}
           </div>
         </section>
       </Layout>
