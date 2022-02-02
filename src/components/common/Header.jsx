@@ -215,7 +215,7 @@ const Header = () => {
                 </a>
 
                 <button
-                  onClick={() => setSearchInput('')}
+                  onClick={() => setIsSearching((prev) => false)}
                   className="px-8 text-white bg-black rounded-full shadow-sm hover:scale-[1.03]"
                 >
                   Cancel
