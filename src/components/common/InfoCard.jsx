@@ -39,7 +39,7 @@ const InfoCard = ({ item }) => {
       </div>
 
       {/* show on min-width 776px */}
-      <div className="hidden md:flex flex-col px-4 relative justify-between w-fullr">
+      <div className="hidden md:flex flex-col px-4 relative justify-between w-full">
         <div>
           <p className="text-[15px] text-gray-500">{location}</p>
           <p className="truncate text-xl">{title}</p>
