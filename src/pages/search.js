@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 
 // UI Components
 import InfoCard from '../components/common/InfoCard';
+import Map from '../components/common/Map';
 
 const Search = ({ data }) => {
   const router = useRouter();
@@ -21,30 +22,35 @@ const Search = ({ data }) => {
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
 
   return (
-    <main className="flex flex-col min-h-screen justify-between">
+    <main className="">
       <Layout>
-        <section className="flex-grow pt-14 px-6">
-          <p className="text-xs">
-            300+ stays for {formattedStartDate} to {formattedEndDate} -{' '}
-            {numOfGuests} guests
-          </p>
+        <section className="w-full py-4 flex items-center justify-between px-10 bg-white">
+          <div>
+            <h1 className="text-3xl font-semibold py-1">Stays in {location}</h1>
+            <p className="text-xs">
+              300+ stays for {formattedStartDate} to {formattedEndDate} -{' '}
+              {numOfGuests} guests
+            </p>
+          </div>
 
-          <h1 className="text-3xl font-semibold mt-2 mb-6">
-            Stays in {location}
-          </h1>
-
-          <div className="hidden lg:flex gap-x-8 mb-5 text-gray-800 whitespace-nowrap">
+          <div className="hidden lg:flex gap-x-8 text-gray-800 whitespace-nowrap">
             <p className="button">Cancellation Flexibility</p>
             <p className="button">Type of Place</p>
             <p className="button">Price</p>
             <p className="button">Rooms and Beds</p>
             <p className="button">More filters</p>
           </div>
+        </section>
 
-          <div>
+        <section className="flex w-full h-[80vh] overflow-hidden">
+          <div className="grow-[2] overflow-scroll scrollbar-hide px-3">
             {data.map((item, i) => (
               <InfoCard key={i} item={item} />
             ))}
+          </div>
+
+          <div className="hidden lg:flex w-5/12">
+            <Map />
           </div>
         </section>
       </Layout>
