@@ -6,12 +6,15 @@ import {
 } from '@mui/icons-material';
 import Image from 'next/image';
 
-const InfoCard = ({ item }) => {
+const InfoCard = ({ item, id }) => {
   const { img, description, lat, long, location, price, star, title, total } =
     item;
 
   return (
-    <div className="flex flex-col w-full h-full mb-4 md:flex-row md:max-h-[250px] max-w-xl mx-auto justify-center md:max-w-full md:justify-start md:p-5 md:border-b md:first:border-t cursor-pointer shadow-sm hover:shadow-md hover:bg-neutral-50">
+    <div
+      id={id}
+      className="flex flex-col w-full h-full mb-4 md:flex-row md:max-h-[250px] max-w-xl mx-auto justify-center md:max-w-full md:justify-start md:p-5 md:border-b md:first:border-t cursor-pointer shadow-sm hover:shadow-md hover:bg-neutral-50"
+    >
       <div className="relative w-full md:min-w-[300px] h-[clamp(13rem,_50vw,_20rem)] md:max-h-52 md:max-w-[315px]">
         <Image
           src={img}

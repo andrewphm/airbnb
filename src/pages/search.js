@@ -1,3 +1,5 @@
+import { useState, useRef } from 'react';
+
 // Layout
 import Layout from '../components/layouts/base';
 
@@ -21,6 +23,8 @@ const Search = ({ data }) => {
 
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
 
+  const [elRefs, setElRefs] = useState([]);
+
   return (
     <main className="">
       <Layout>
@@ -43,14 +47,14 @@ const Search = ({ data }) => {
         </section>
 
         <section className="flex w-full h-[80vh] overflow-hidden">
-          <div className="grow-[2] overflow-scroll scrollbar-hide px-3">
+          <div className="grow-[2] overflow-scroll scrollbar-hide px-3 scroll-smooth">
             {data.map((item, i) => (
-              <InfoCard key={i} item={item} />
+              <InfoCard key={i} item={item} id={i} />
             ))}
           </div>
 
           <div className="hidden lg:flex w-5/12">
-            <Map />
+            <Map data={data} />
           </div>
         </section>
       </Layout>
