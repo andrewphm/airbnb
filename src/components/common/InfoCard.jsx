@@ -11,14 +11,14 @@ const InfoCard = ({ item, id, elRef }) => {
     item;
 
   const handleMouseOver = () => {
-    elRef.current.classList.add('z-50');
-    elRef.current.lastChild.lastChild.lastChild.classList.add('highlight');
+    elRef?.current.classList.add('z-40');
+    elRef?.current.lastChild.lastChild.lastChild.classList.add('highlight');
   };
 
   const handleMouseLeave = () => {
-    elRef.current.classList.remove('z-50');
+    elRef?.current.classList.remove('z-40');
 
-    elRef.current.lastChild.lastChild.lastChild.classList.remove('highlight');
+    elRef?.current.lastChild.lastChild.lastChild.classList.remove('highlight');
   };
 
   return (
@@ -26,7 +26,7 @@ const InfoCard = ({ item, id, elRef }) => {
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       id={id}
-      className="flex flex-col w-full h-full mb-4 md:flex-row md:max-h-[250px] max-w-xl mx-auto justify-center md:max-w-full md:justify-start md:p-5 md:border-b md:first:border-t cursor-pointer shadow-sm hover:shadow-md hover:bg-neutral-50"
+      className="flex flex-col w-full mb-4 md:flex-row md:max-h-[250px] max-w-xl mx-auto justify-center md:max-w-full md:justify-start md:p-5 md:border-b md:first:border-t cursor-pointer shadow-sm hover:shadow-md hover:bg-neutral-50"
     >
       <div className="relative w-full md:min-w-[300px] h-[clamp(13rem,_50vw,_20rem)] md:max-h-52 md:max-w-[315px]">
         <Image
@@ -49,9 +49,7 @@ const InfoCard = ({ item, id, elRef }) => {
         <p className="text-lg">{location}</p>
         <p className="truncate text-lg">{title}</p>
         <p className="font-bold">{price}</p>
-        <p className="truncate md:overflow-visible md:whitespace-normal w-full">
-          {description}
-        </p>
+        <p className="truncate w-11/12">{description}</p>
       </div>
 
       {/* show on min-width 776px */}
@@ -71,7 +69,10 @@ const InfoCard = ({ item, id, elRef }) => {
             <Star className="text-red-500 text-[15px]" />
             <p>{star}</p>
           </div>
-          <p className="font-bold">{price}</p>
+          <div>
+            <p>{price}</p>
+            <p className="font-bold">{total}</p>
+          </div>
         </div>
 
         <div className="absolute right-4 top-2 text-red-500 ">

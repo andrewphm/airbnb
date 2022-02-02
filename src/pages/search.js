@@ -33,7 +33,7 @@ const Search = ({ data }) => {
   return (
     <main className="">
       <Layout>
-        <section className="w-full py-4 flex items-center justify-between px-10 bg-white">
+        <section className="w-full py-4 flex items-center justify-between px-4 md:px-10 bg-white">
           <div>
             <h1 className="text-3xl font-semibold py-1">Stays in {location}</h1>
             <p className="text-xs">
@@ -51,8 +51,8 @@ const Search = ({ data }) => {
           </div>
         </section>
 
-        <section className="flex w-full h-[80vh] overflow-hidden">
-          <div className="grow-[2] overflow-scroll scrollbar-hide px-3 scroll-smooth">
+        <section className="flex w-screen md:h-[80vh] md:overflow-hidden mt-3 md:mt-0">
+          <div className="w-full md:grow-[2] md:overflow-scroll md:scrollbar-hide px-4 scroll-smooth flex flex-col gap-y-4 md:gap-y-0">
             {data.map((item, i) => (
               <InfoCard key={i} item={item} id={i} elRef={elRefs[i]} />
             ))}
