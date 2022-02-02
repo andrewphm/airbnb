@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import getCenter from 'geolib/es/getCenter';
 
-const Map = ({ data }) => {
+const Map = ({ data, elRefs }) => {
   const coordinates = data.map((item) => ({
     longitude: item.long,
     latitude: item.lat,
@@ -26,7 +26,7 @@ const Map = ({ data }) => {
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
     >
       {data.map((item, i) => (
-        <div key={i}>
+        <div ref={elRefs[i]} key={i} className="relative hover:z-50 ">
           <Marker
             longitude={item.long}
             latitude={item.lat}

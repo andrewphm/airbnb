@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, createRef } from 'react';
 
 // Layout
 import Layout from '../components/layouts/base';
@@ -15,15 +15,20 @@ import Map from '../components/common/Map';
 const Search = ({ data }) => {
   const router = useRouter();
 
-  console.log(data);
-
   const { location, startDate, endDate, numOfGuests } = router.query;
 
   const formattedStartDate = format(new Date(startDate), 'dd MMMM yy');
-
   const formattedEndDate = format(new Date(endDate), 'dd MMMM yy');
 
   const [elRefs, setElRefs] = useState([]);
+
+  useEffect(() => {
+    const refs = Array(data.length)
+      .fill()
+      .map((_, i) => createRef());
+
+    setElRefs(refs);
+  }, [data]);
 
   return (
     <main className="">
@@ -49,12 +54,12 @@ const Search = ({ data }) => {
         <section className="flex w-full h-[80vh] overflow-hidden">
           <div className="grow-[2] overflow-scroll scrollbar-hide px-3 scroll-smooth">
             {data.map((item, i) => (
-              <InfoCard key={i} item={item} id={i} />
+              <InfoCard key={i} item={item} id={i} elRef={elRefs[i]} />
             ))}
           </div>
 
           <div className="hidden lg:flex w-5/12">
-            <Map data={data} />
+            <Map data={data} elRefs={elRefs} />
           </div>
         </section>
       </Layout>

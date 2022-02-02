@@ -31,3 +31,11 @@ body {
 .rdrDefinedRangesWrapper {
   display: none;
 }
+
+.highlight {
+  z-index: 100;
+  transform: scale(1.04);
+  transition: 0.2s ease-out;
+  background: black;
+  color: white;
+}

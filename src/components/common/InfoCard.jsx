@@ -6,12 +6,25 @@ import {
 } from '@mui/icons-material';
 import Image from 'next/image';
 
-const InfoCard = ({ item, id }) => {
+const InfoCard = ({ item, id, elRef }) => {
   const { img, description, lat, long, location, price, star, title, total } =
     item;
 
+  const handleMouseOver = () => {
+    elRef.current.classList.add('z-50');
+    elRef.current.lastChild.lastChild.lastChild.classList.add('highlight');
+  };
+
+  const handleMouseLeave = () => {
+    elRef.current.classList.remove('z-50');
+
+    elRef.current.lastChild.lastChild.lastChild.classList.remove('highlight');
+  };
+
   return (
     <div
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
       id={id}
       className="flex flex-col w-full h-full mb-4 md:flex-row md:max-h-[250px] max-w-xl mx-auto justify-center md:max-w-full md:justify-start md:p-5 md:border-b md:first:border-t cursor-pointer shadow-sm hover:shadow-md hover:bg-neutral-50"
     >
